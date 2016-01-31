@@ -1,0 +1,71 @@
+<?php $__env->startSection('content'); ?>
+    <?php /* / main content here*/ ?>
+
+    <?php /* start of row */ ?>
+    <div class="row">
+        <div class="span12">
+            <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-list-alt"></i>
+                    <h3> Todays Production  </h3>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <div class="widget big-stats-container">
+                        <div class="widget-content">
+                            <!-- <h3 class="head-1">Howdy, <?php echo Auth::user()->username; ?> !</h3> -->
+                            <table class="table">
+                                <tr>
+                                    <th>Item Id</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Remaining</th>
+                                </tr>
+                                <?php foreach($items as $item): ?>
+                                <tr>
+                                    <td> <?php echo $item->item_id; ?> </td>
+                                    <td> <?php echo Item::find($item->item_id)->name; ?> </td>
+                                    <td> <?php echo $item->qty; ?> </td>
+                                    <td> <?php echo $item->remaining; ?> </td>
+                                </tr>
+                                <?php endforeach; ?>
+                              
+                            </table>
+
+                        </div>
+                        <!-- /widget-content -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+                  <!-- Modal -->
+                <a href="#indexModal" id="PModal" data-toggle="modal"></a>
+                <div id="indexModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                            <h2>Welcome to FPOSS!</h2>
+                            <img  height="130" width="150" src="/img/avatar.png">
+                            <p style="float:right;">The quick brown fox jumps over the rainbow and the rainbow became fox.</p>
+                    </div>
+                </div>
+                <!-- /modal -->
+          
+    </div><!-- /row -->
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('external-scripts'); ?>
+    
+    <script type="text/javascript" src="/js/ai.js"></script>
+
+
+<?php $__env->stopSection(); ?>
+
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

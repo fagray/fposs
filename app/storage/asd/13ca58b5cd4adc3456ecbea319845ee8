@@ -1,0 +1,35 @@
+<?php $__env->startSection('content'); ?>
+	<h2>Settings </h2><hr/>
+	<div class="row">
+
+		<div class="span4">
+
+			<div class="list-group">
+			  <a href="#/categories" class="list-group-item">
+			   <i class="icon-th-large"></i> Categories
+			  </a>
+			  <a href="#/coupons" class="list-group-item">Coupons</a>
+			  <a href="#/flavors" class="list-group-item">Item Flavors</a>
+			  <a href="#/config" class="list-group-item">Store Config</a>
+			
+			</div>
+			
+
+		</div>
+
+		<div class="span8">
+			
+			<div ng-view></div>
+				
+		</div><!--  /span8 -->
+	</div><!--  /row -->
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+   
+    <script src="/js/angular-route.min.js"> </script>
+   
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,67 @@
+<?php $__env->startSection('content'); ?>
+	
+	<h2 class="head-1 ">Item Production</h2>
+	<!-- <a id="addItem" class="btn btn-primary">Add Item</a><br/><br/> -->
+	
+	<div class="row">
+		<div  id="panel-content" class="span4">
+			 <div class="widget widget-table action-table">
+		        <div class="widget-header"> <i class="icon-plus"></i>
+		            <h3>Select Items</h3>
+		        </div>
+		        <div style="padding:10px;height:400px;overflow:scroll;" class="widget-content">
+
+		        	<?php foreach($items as $item): ?>
+
+			        	<div class="item"  >
+			        			<a href="#" data-item="<?php echo $item->id; ?>" data-name="<?php echo $item->name; ?>" >
+				        			<img src="/img/cupcake.jpg" width="50" height="50">
+				        			<?php echo $item->name; ?>
+
+				        		</a>	
+				        			<span class="pull-right" style="color:green;">Available </span>
+				        			<span id="stat" class="pull-left" style="color:green;"> </span>
+			        			<br/>
+			        			
+			        			<hr/>
+
+			        	</div>
+		        	<?php endforeach; ?>
+
+
+		        </div>
+
+     		</div>   <!-- /widget-table -->
+		</div><!-- /span4 -->
+
+		<div  id="panel-content" class="span8 ">
+			 <div class="widget widget-table action-table">
+		        <div class="widget-header"> <i class="icon-plus"></i>
+		            <h3>For Production</h3>
+		        </div>
+		        <div style="padding:10px;" class="production-container widget-content">
+		       <?php echo Form::open(['id' => 'production']); ?>
+
+		     
+		        <!-- <input class="btn btn-info" type="submit" value="Proceed"><hr/> -->
+		        <?php echo Form::submit('Proceed',['class' => 'btn btn-info']); ?><hr/>
+		        <?php echo Form::close(); ?>
+
+		        	
+
+
+		        </div>
+
+     		</div>   <!-- /widget-table -->
+		</div>
+
+	</div><!-- /row -->
+	
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+	<script type="text/javascript" src="/js/production.js"></script>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

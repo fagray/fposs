@@ -1,0 +1,48 @@
+                    <div class="control-group">
+                        <label class="control-label" for="category name">Item Name</label>
+                        <div class="controls">
+                            <?php echo Form::text('name' ,null,array('class' => 'form-control span4','autofocus')); ?>
+
+                        </div> <!-- /controls -->
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="">Description</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::textarea('description',null,array('class' => 'form-control span4','rows' => '4')); ?>
+
+
+                            </div>
+                        </div>	<!-- /controls -->
+                    </div>
+                    <p class="head-4 dashed bold">Categorization </strong> </p>
+                    <div class="control-group">
+                        <label class="control-label" for="">Category</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::select('category_id',$cat_ids,'',
+
+                                    ['id' => 'category']); ?>
+
+
+                            </div>
+                        </div>	<!-- /controls -->
+                    </div>
+                    <p class="head-4 dashed bold">Pricing </strong> </p>
+                    <div class="control-group">
+                        <label class="control-label" for="radiobtns">Selling Price</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+                                <span class="add-on">Php</span>
+                                <?php echo Form::number('price',null,array('class' => 'form-control span3')); ?>
+
+                                <span class="add-on">/ pc.</span>
+
+                            </div>
+                        </div>	<!-- /controls -->
+                    </div>

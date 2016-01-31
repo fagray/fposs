@@ -1,0 +1,65 @@
+<?php $__env->startSection('content'); ?>
+
+	<h2>Item Details</h2><br/>
+<!-- 	<div class="pull-right">
+         <div class="btn-group">
+            <button class="btn btn-sm btn-primary">Regenerate BarCode</button>
+            <button class="btn btn-sm btn-primary">Change Raw Materials</button>
+			<button class="btn btn-sm btn-primary">View Sales </button>
+			<button class="btn btn-sm btn-primary">Edit Details </button>
+			<button class="btn btn-sm btn-danger">Remove Product</button>
+         </div>
+    </div><Br/><hr/> -->
+
+	<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basic" aria-controls="Basic" role="tab" data-toggle="tab">Basic</a></li>
+    <li role="presentation"><a href="#inventory" aria-controls="Inventory" role="tab" data-toggle="tab">Inventory</a></li>
+    <li role="presentation"><a href="#raw" aria-controls="Raw Materials" role="tab" data-toggle="tab">Recipe</a></li>
+    <li role="presentation"><a href="#sales" aria-controls="Sales" role="tab" data-toggle="tab">Sales</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="basic">
+    	
+    	<div class="row">
+    		<div class="span4">
+	    		<img src="/img/cupcake.jpg" width="200" height="200">
+	    		<p style="font-size:17px;">Item Code: <?php echo $item->barcode; ?>
+
+
+          <?php echo DNS1D::getBarcodeHTML($item->barcode, "EAN13",2,60);; ?> 
+          <strong></strong> </p>
+    		</div>
+
+	    	<div class="span8">
+	    		<h2><?php echo $item->name; ?></h2>
+	    		
+	    	</div>
+
+    	</div>
+    	
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="inventory">...</div>
+    <div role="tabpanel" class="tab-pane" id="raw">
+    	<?php foreach($materials as $material): ?>
+    		<h2><?php echo $material->name; ?></h2>
+
+    	<?php endforeach; ?>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="sales">...</div>
+  </div>
+
+</div>
+	
+	
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

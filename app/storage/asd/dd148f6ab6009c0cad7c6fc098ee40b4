@@ -1,0 +1,63 @@
+<?php $__env->startSection('content'); ?>
+    <h2 class="head-1">Reports</h2><hr/>
+
+
+
+    <p> Statistics</p>
+    <div class="row">
+      <div class="span12">
+        <div class="card card-block">
+          <h3 class="card-title">Today's Sales </h3>
+            <h1 class="card-text">
+            <strong style="color:red;">Php </strong>
+                
+            </h1>as of <?php echo Carbon\Carbon::now(); ?>
+
+        </div>
+      </div>
+ 
+    </div><!-- /end row -->
+    
+
+    <canvas id="bar-chart" width="800" height="300"></canvas>
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+    <script src="/js/chart.min.js"></script>
+    
+    <script>
+
+
+        // var ctx_line = document.getElementById('line-chart').getContext('2d');
+        // var ctx_bar = document.getElementById('bar-chart').getContext('2d');
+
+        // var chart = { 
+        //     'labels' :  [ 'January','February','March','April','May','June','July','August','September','November','December'],
+        //     'datasets' : [{
+
+        //         data : [ 100,200,300]
+        //     }]
+        // };
+                
+
+       // new Chart(ctx_line).Line(chart);
+        // new Chart(ctx_bar).Bar(chart);
+
+
+        //  highcharts bar graph
+
+
+            
+           
+    </script>
+
+
+
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

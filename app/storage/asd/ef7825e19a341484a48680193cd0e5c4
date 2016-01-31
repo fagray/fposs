@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Item Badrcodes</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Hartija Print Framework -->
+    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print">
+
+</head>
+<body>
+	<div class="main">
+	    <div class="main-inner">
+	        <div class="container">
+
+				<h2>Item Barcodes</h2><hr/>
+		
+		
+				<div class="row">
+					<?php foreach($items as $item): ?>
+					
+					<div class="span4">
+						<?php echo $item->name; ?>
+
+						<?php echo DNS1D::getBarcodeHTML($item->barcode, "EAN13",2,60); ?>
+
+						<?php echo $item->barcode; ?>
+
+						
+						
+					</div>
+
+					<?php endforeach; ?>
+					
+				</div><!-- /row -->
+			</div>
+		</div>
+	</div>		
+	
+
+
+
+</body>
+</html>
+

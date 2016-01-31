@@ -1,0 +1,10 @@
+<?php $__env->startSection('content'); ?>
+
+	<h2>Item Barcode</h2>
+	<?php echo $code; ?>
+
+	
+	<?php echo DNS1D::getBarcodeHTML($code, "EAN13",2,60);; ?> 
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

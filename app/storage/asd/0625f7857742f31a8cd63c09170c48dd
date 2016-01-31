@@ -1,0 +1,183 @@
+<?php $__env->startSection('content'); ?>
+  
+    <div class="row">
+        <div class="span7"><div ng-view></div>
+        <div id="flash" ></div>
+            <div class="widget widget-nopad">
+                <div class="shortcuts"></div>
+                <!-- <div class="widget-header"> <i class="icon-tag"></i>
+                    <h3> Sales Register</h3>
+                    
+                </div> -->
+                <!-- /widget-header -->
+                <div style="padding:0px;" class="widget-content" ng-controller="RegistrarController">
+                <div class="subnavbar">
+                  <div class="subnavbar-inner">
+                    <div class="container">
+                      <ul class="mainnav">
+                        <li>
+                            <a id="paymentKey" class="payment-key" href="#">
+                                <i class="icon-ok"></i>
+                                <span>Complete (F6)</span> 
+                            </a> 
+                        </li>
+                        <li>
+                            <a id="voidKey" class="payment-key" href="#"><i class="icon-ban-circle"></i>
+                                <span>Void (F7)</span> 
+                            </a> 
+                        </li>
+                        <li>
+                            <a id="discountKey" class="payment-key" href="#"><i class="icon-thumbs-up"></i>
+                                <span>Discount (F8)</span> 
+                            </a> 
+                        </li>
+                       <!--  <li>
+                            <a class="payment-key" href="#"><i class="icon-off"></i>
+                                <span>Close Register (F10)</span> 
+                            </a> 
+                        </li> -->
+                        
+                        </ul>
+                        </li>
+                        <span id="trans_id">
+                            
+                            <?php if(Session::has('trans_id')): ?>
+
+                              Transaction # :  
+                                <strong id="trans_id" data-value="<?php echo Session::get('trans_id'); ?>">
+                                    <?php echo Session::get('trans_id'); ?>
+
+                                </strong>
+
+                            <?php endif; ?>
+
+                        </span>
+                      </ul>
+                    </div>
+                    <!-- /container --> 
+                  </div>
+                  <!-- /subnavbar-inner --> 
+                </div>
+                    <div class="widget big-stats-container">
+                        
+                        <div class="widget-content">
+                        <div id="loader">Adding</div>
+                        
+                            <!--  <p style="font-size:18px;padding:10px;margin-top:10px;">Total : </p> -->
+                            <?php echo Form::open(array(
+
+                                                'id'    => 'regForm',
+                                                'method'   => 'POST',
+                                                'class' => 'form-horizontal'
+
+                                                
+                                        )); ?>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="radiobtns">Find/Scan Item</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <input id="barcode" name="code"  class="span5 m-wrap input-lg"  placeholder ="Enter/Scan Barcode " autofocus="autofocus"  style="height:27px;" id="appendedInputButton" type="text">
+                                        </div>
+                                    </div>  <!-- /controls -->
+                                   
+                                </div>
+                            <?php echo Form::close(); ?>
+
+                            <span id="preloader"></span>
+                            <div style="" class="items-container">
+                                <table id="items" class="table  table-bordered">
+                                    <thead>
+                                    <tr id="header">
+                                        <th> Item Code </th>
+                                        <th> Description </th>
+                                        <th> Price</th>
+                                        <th> Quantity</th>
+                                        <th></th>
+
+                                        
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                           <!--  <div class="form-actions">
+                                <span class="pull-right">
+                                    <h3>
+                                        Total : Php <strong id="total">0.00</strong>
+                                    </h3>
+                                </span>
+                            </div> -->
+                        </div>
+                        <!-- /widget-content -->
+                    </div>
+                </div><?php /*/end of widget-content */ ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span5">
+                <div class="widget widget-nopad">
+                    <div class="widget-header"> <i class="icon-tag"></i>
+                        <h3>Sales Order</h3>
+                    </div> <!-- /widget-header -->
+                    <div class="widget-content">
+                         <?php echo Form::open(['route' => 'registrar.purchase',
+                            'class' => 'form-control','id' => 'payment']); ?>
+
+                            <div id="summary"  style="padding:10px;">
+                                <p class="alert alert-info" style="font-size:18px;font-weight:bold;"> Total : <span class="total"></span>
+
+                               
+                                    <label class="control-label" for="category name">Enter Cash </label>
+                                    
+                                        <?php echo Form::number('cash',null,['class' => 'form-control','required']); ?>
+
+                                        <?php echo Form::hidden('customer_id','13'); ?>
+
+                                        <?php echo Form::hidden('trans_id',''); ?>
+
+                                        <?php echo Form::hidden('qty',''); ?>
+
+                                        <?php echo Form::hidden('cashier',Auth::user()->username); ?>
+
+                                        <?php echo Form::hidden('change',''); ?>
+
+                                        <?php echo Form::hidden('amount',''); ?>
+
+                                        <?php echo Form::submit('Add Payment',['class' => 'form-control   btn-primary']); ?>
+
+                           
+                               
+                                    <Br/><strong style="font-size:15px;"><span id="amount"></span><br/>
+                                    <span id="change"></span></strong>
+                                    <span id="qty"></span>
+                                </p>
+                               
+                                
+                                
+                            </div><!-- /summary -->
+                        <?php echo Form::close(); ?> 
+                 <!--        <hr/>  <strong>Print Preview</strong> -->
+
+
+
+
+                    </div><!-- /content -->
+                </div><?php /* /end no-pad */ ?>
+            </div><!-- /end of span5 -->
+        </div><!-- /row -->
+    </div><!-- /row -->
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('external-scripts'); ?>
+        
+    <script type="text/javascript" src="/js/fposs.js"></script>
+
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

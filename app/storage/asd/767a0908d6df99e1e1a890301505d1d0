@@ -1,0 +1,82 @@
+<?php $__env->startSection('content'); ?>
+    
+    <div class="widget widget-table action-table">
+        <div class="widget-header"> <i class="icon-plus"></i>
+            <h3>New Item</h3>
+        </div>
+        <div style="padding:10px;" class="widget-content">
+            <p class="head-4 dashed bold ">Item details</p>
+
+                    <?php echo Form::open(array('route' => 'items.store','name'=>'form-item','class' => 'form-horizontal')); ?>
+
+
+            
+                    <?php echo $__env->make('items/partials.form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+                    <div class="raw">
+                         <p class="head-4 dashed bold">Ingredients </strong> </p>
+
+                        <?php foreach($ingredients as $ingredient): ?>
+                            <label class="control-label" for=""><?php echo $ingredient->name; ?></label>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="input-prepend input-append">
+
+                                        <input value="<?php echo $ingredient->id; ?>" name="ing_id[]" type="checkbox" ng-model="<?php echo $ingredient->name; ?>">
+                                        <!-- <input placeholder="amount in grams" name="ing_amount[]" type="text" ng-show="<?php echo $ingredient->name; ?>">
+
+                                        <span ng-show="<?php echo $ingredient->name; ?>" class="add-on">
+                                        <?php echo $ingredient->units; ?>
+
+                                        </span> -->
+                                    </div>
+                                </div>  <!-- /controls -->
+
+                            </div>
+                        <?php endforeach; ?>
+                    </div><!-- /raw -->
+                   
+
+                    <?php echo Form::hidden('status','1'); ?>
+
+                    <div class="form-actions">
+                        <button  type="submit" class="btn btn-primary"><icon class="icon-save"></icon> Save</button>
+                        <a href="/items" class="btn"><icon class="icon-arrow-left"></i> Back</a>
+                    </div>
+                    <?php echo Form::close(); ?>
+
+        </div><?php /* /end of widget-content */ ?>
+    </div><?php /* /end of widget-table*/ ?>
+
+    <br/><Br/>
+
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('external-scripts'); ?>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+             $('div.raw').hide();
+
+            $('select#category').on('change',function(){
+                // alert("fuck");
+                var cat_id  = $(this).val();
+                var category = $(this).find('option[value=' + cat_id + ']').text();
+                // alert(category);
+                
+                if(category == 'General'){
+
+                    $('div.raw').hide();
+
+                }else{
+
+                    $('div.raw').show();
+                }
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

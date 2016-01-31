@@ -1,0 +1,86 @@
+<?php $__env->startSection('content'); ?>
+    <div class="widget ">
+        <div class="widget-header"> <i class="icon-plus"></i>
+            <h3>New Vendor</h3>
+        </div>
+        <div style="padding:10px;" class="widget-content">
+           
+
+           	<div class="row">
+           	
+           		<div class="span10">
+           			 <p class="head-4 dashed bold">Basic Information</p>
+           			<?php echo Form::open(array('route' => 'suppliers.store','class' => 'form-horizontal')); ?>
+
+
+	            <div class="control-group">
+	                <label class="control-label" for="category name">Company Name</label>
+	                <div class="controls">
+	                    <?php echo Form::text('name',null,array('autofocus'=> '','class' => 'form-control span4')); ?>
+
+	                </div> <!-- /controls -->
+	            </div>
+
+	            <div class="control-group">
+	                <label class="control-label" for="category name">Resource Person</label>
+	                <div class="controls">
+	                    <?php echo Form::text('resource_person',null,array('autofocus'=> '','class' => 'form-control span4')); ?>
+
+	                </div> <!-- /controls -->
+	            </div>
+	             <p class="head-4 dashed bold">Contact Information</p>
+	            <div class="control-group">
+	                <label class="control-label" for="radiobtns">Email</label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::text('email',null,array('class' => 'form-control span4')); ?>
+
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+	            <div class="control-group">
+	                <label class="control-label" for="radiobtns">Contact no.</label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::text('text',null,array('class' => 'form-control span4')); ?>
+
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	            <div class="control-group">
+	                <label class="control-label" for="">Address</label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::textarea('remarks',null,array('class' => 'form-control span4','rows' => '4')); ?>
+
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	            <div class="form-actions">
+	                <button type="submit" class="btn btn-primary"><icon class="icon-save"></icon> Save</button>
+	                <a href="/items" class="btn"><icon class="icon-arrow-left"></i> Back</a>
+	            </div>
+	            <?php echo Form::close(); ?>
+
+           	</div>
+        </div>
+            
+        </div><?php /* /end of widget-content */ ?>
+    </div><?php /* /end of widget-table*/ ?>
+
+    <br/><Br/>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

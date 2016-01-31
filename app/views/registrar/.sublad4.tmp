@@ -1,0 +1,213 @@
+
+@extends('layouts.master')
+
+@section('external-styles')
+    <style type="text/css">
+
+    .dModal { 
+
+        width:500px;
+        height: 120px;
+        margin: auto;
+        padding: 10px;
+        background: #ccc;
+        z-index: 119;
+    }
+
+    .dModal-header {
+
+        margin: 0;
+        height: 40px;
+        font-size: 20px;
+        padding: 5px;
+        border: 1px solid #ccc;
+    }
+
+    </style>
+
+@stop
+
+
+@section('content')
+  <div class="dModal">
+        <div class="dModal-header">
+            
+            Enter discount
+
+        </div>
+        <div class="dModal-body">
+
+            <input class="input-lg" name="discountPercentage">
+
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="span8"><div ng-view></div>
+        <div id="flash" ></div>
+            <div class="widget widget-nopad">
+                <div class="shortcuts"></div>
+                <!-- <div class="widget-header"> <i class="icon-tag"></i>
+                    <h3> Sales Register</h3>
+                    
+                </div> -->
+                <!-- /widget-header -->
+                <div style="padding:0px;" class="widget-content" ng-controller="RegistrarController">
+                <div class="subnavbar">
+                  <div class="subnavbar-inner">
+                    <div class="container">
+                      <ul class="mainnav">
+                        <li>
+                            <a id="paymentKey" class="payment-key" href="#">
+                                <i class="icon-ok"></i>
+                                <span>Complete (F6)</span> 
+                            </a> 
+                        </li>
+                        <li>
+                            <a id="voidKey" class="payment-key" href="#"><i class="icon-ban-circle"></i>
+                                <span>Void (F7)</span> 
+                            </a> 
+                        </li>
+                        <li>
+                            <a id="discountKey" class="payment-key" href="#"><i class="icon-thumbs-up"></i>
+                                <span>Discount (F8)</span> 
+                            </a> 
+                        </li>
+                        <li>
+                            <a class="payment-key" href="#"><i class="icon-off"></i>
+                                <span>Close Register (F10)</span> 
+                            </a> 
+                        </li>
+                        
+                        </ul>
+                        </li>
+                        <span id="trans_id">
+                            
+                            @if(Session::has('trans_id'))
+
+                              Transaction # :  
+                                <strong>
+                                    {{ Session::get('trans_id') }}
+                                </strong>
+
+                            @endif
+
+                        </span>
+                      </ul>
+                    </div>
+                    <!-- /container --> 
+                  </div>
+                  <!-- /subnavbar-inner --> 
+                </div>
+                    <div class="widget big-stats-container">
+                        
+                        <div class="widget-content">
+
+                        
+                            <!--  <p style="font-size:18px;padding:10px;margin-top:10px;">Total : </p> -->
+                            {{ Form::open(array(
+
+                                                'id'    => 'regForm',
+                                                'method'   => 'POST',
+                                                'class' => 'form-horizontal'
+
+                                                
+                                        )) 
+                            }}
+                                <div class="control-group">
+                                    <label class="control-label" for="radiobtns">Find/Scan Item</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <input id="barcode" name="code"  class="span5 m-wrap input-lg"  placeholder ="Enter/Scan SKU number" autofocus=""  style="height:27px;" id="appendedInputButton" type="text">
+                                        </div>
+                                    </div>  <!-- /controls -->
+                                   
+                                </div>
+                            {{ Form::close() }}
+                            <span id="preloader"></span>
+                            <div style="height:300px;overflow:scroll;" class="items-container">
+                                <table id="items" class="table  table-bordered">
+                                    <thead>
+                                    <tr id="header">
+                                        <th> Item Code </th>
+                                        <th> Item ID </th>
+                                        <th> Price</th>
+                                        <th> Quantity</th>
+                                        
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-actions">
+                                <span class="pull-right">
+                                    <h3>
+                                        Total : Php <strong id="total">0.00</strong>
+                                    </h3>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /widget-content -->
+                    </div>
+                </div>{{--/end of widget-content --}}
+            </div>
+        </div>
+        <div class="span4">
+            <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-tag"></i>
+                    <h3>Order Summary</h3>
+
+                </div>
+                <!-- /widget-header -->
+                <div id="summary" class="widget-content">
+                <p> Total : <span class="total"></span>
+                    <input type="number" name="amount" id="input" class="form-control" value="" min="{5"} max="" step="" required="required" title=""> 
+                    <Br/>
+                    <span id="amount"></span><br/>
+                    <span id="change"></span>
+                </div>
+               
+               
+            </div>
+        </div>{{-- /end span4 --}}
+
+         <!-- Modal -->
+    <div id="modal-payment"  class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Enter Amount</h3>
+        </div>
+        <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label" for="customer fname">Amount</label>
+                <div class="controls">
+                    <input autofocus="autofocus" class="form-control" name="payment">
+                </div> <!-- /controls -->
+            </div>
+            
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn-primary">Add Payment</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+        {{ Form::close() }}
+    </div>
+
+   
+   
+    </div>
+    <!-- /row -->
+
+@stop
+
+
+@section('external-scripts')
+        
+    <script type="text/javascript" src="/js/fposs.js"></script>
+
+@stop

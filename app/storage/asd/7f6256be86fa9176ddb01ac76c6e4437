@@ -1,0 +1,62 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container"><a class="brand" href="index.php">Flibby's POS  </a>
+
+            <?php if(Auth::check()): ?>
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        <li><a href="#modal-calc" data-toggle="modal"><i clas="icon-calc"></i>Calculator</a></li>
+                        <li><a href="#" id="conv" data-toggle="modal" >Conversion Units</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-user"></i> <strong>Howdy,</strong> <?php echo Auth::user()->username; ?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;">Change Password</a></li>
+                                <li> <?php echo link_to_route('logout','Logout'); ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <?php endif; ?>
+                        <!--/.nav-collapse -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /navbar-inner -->
+    <div class="navbar-bottom"></div>
+</div>
+<!-- /navbar -->
+
+<!-- Modal Conversion -->
+    <div id="modal-conversion" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button id="modal-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Manual Re-stock</h3>
+        </div>
+       
+        <div class="modal-body">
+            
+          
+        </div>
+        <div class="modal-footer">
+            
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+        
+
+        
+    </div>
+
+ <?php $__env->startSection('external-scripts'); ?>
+    <script type="text/javascript">
+        $('a#conv').click(function(){
+            alert("Asdasd");
+            $('#modal-conversion').modal({
+                backdrop: false
+            });
+        });
+        
+    </script>
+ <?php $__env->stopSection(); ?>   
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

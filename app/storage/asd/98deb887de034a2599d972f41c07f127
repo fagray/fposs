@@ -1,0 +1,141 @@
+<?php $__env->startSection('content'); ?>
+    <div class="widget ">
+        <div class="widget-header"> <i class="icon-plus"></i>
+            <h3>New Shipment</h3>
+        </div>
+        <div style="padding:10px;" class="widget-content">
+           
+           	<div class="row">
+           		<div class="span10">
+           		<span class="pull-right">Supplier : <strong id="supp_name"></strong></span>
+
+ 				<p class="head-4 dashed bold">Shipment details</p>
+ 				
+           		<?php echo Form::open(array('route' => 'shipments.store','class' => 'form-horizontal')); ?>
+
+
+	          	
+	            <div class="control-group">
+                        <label class="control-label" for="">Stock Name</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::select('stock_id',['Please select',$ingredients],'',array('id' => 'stock')); ?>
+
+
+                            </div>
+                        </div>	<!-- /controls -->
+                </div>
+	            <div class="control-group">
+	                <label class="control-label" for="radiobtns">Quantity</label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::number('qty',null,array('class' => 'form-control span2','min' => '1','max' => '500')); ?>
+
+	                         <span class="add-on" id="unit"></span>
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	            <div class="control-group">
+	                <label class="control-label" for="radiobtns">Received by </label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::text('received_by',Auth::user()->username,array('class' => 'form-control span3','disabled')); ?>
+
+	                       
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	            <div class="control-group">
+	                <label class="control-label" for="radiobtns"> Deliver by </label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::text('deliver_by',null,array('class' => 'form-control span3')); ?>
+
+	                       
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	            <div class="control-group">
+	                <label class="control-label" for="">Remarks</label>
+
+	                <div class="controls">
+	                    <div class="input-prepend input-append">
+
+	                        <?php echo Form::textarea('remarks',null,array('class' => 'form-control span4','rows' => '4')); ?>
+
+
+	                    </div>
+	                </div>	<!-- /controls -->
+	            </div>
+
+	        
+	            
+
+	            <div class="form-actions">
+	                <button type="submit" class="btn btn-primary"><icon class="icon-save"></icon> Save</button>
+	                <a href="/items" class="btn"><icon class="icon-arrow-left"></i> Back</a>
+	            </div>
+	            <?php echo Form::close(); ?>
+
+           	</div>
+        </div>
+            
+        </div><?php /* /end of widget-content */ ?>
+    </div><?php /* /end of widget-table*/ ?>
+
+    <br/><Br/>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+
+
+		$('select[id=stock]').change(function(){
+
+			// alert("ad");
+			//get its value
+			var stock = $(this).val();
+			var stock_name  = $("#stock option:selected").text();
+
+			
+
+			$.getJSON('/stocks/units/'+stock,function(data){
+				console.log(data);
+				// alert(data.price);
+
+				$('span[id=unit]').html(data.shipment_unit);
+				
+			});
+
+			$.getJSON('/stocks/suppliers/'+stock,function(data){
+				console.log(data);
+				// alert(data.price);
+
+				$('strong[id=supp_name]').html( data);
+				
+			});
+
+		});
+	});
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,232 @@
+<?php $__env->startSection('content'); ?>
+    <div class="widget widget-table action-table">
+        <div class="widget-header"> <i class="icon-plus"></i>
+            <h3>New Stock</h3>
+        </div>
+        <div class="widget-content">
+            <div class="row">
+                <div class="span10">
+                 <p class="head-4 dashed bold">Basic Information</p>
+                    <?php echo Form::open(array('class' => 'form-horizontal')); ?>
+
+                    
+                   <!--  <div class="control-group">
+                        <label class="control-label" for="category name">Units</label>
+                        <div class="controls">
+                            
+                            <?php echo Form::select('units',
+                                            [
+                                                'pcs' => 'Pieces(pcs)',
+                                                'g'   => 'Grams(g)',
+                                                'kg'  => 'Kilograms(kg)'
+                                            ]
+                            ); ?>
+
+                            <span class="input-group-addon">This will served as the basis when adding a new item.</span>
+                        </div> 
+                    </div> -->
+
+                    <div class="control-group">
+                        <label class="control-label" for="category name">Ingredient Name</label>
+                        <div class="controls">
+                            <?php echo Form::text('name',null,array('autofocus'=> '','class' => 'form-control span3')); ?>
+
+                        </div> <!-- /controls -->
+                    </div>
+
+                    
+
+                    <div class="control-group">
+                        <label class="control-label" for="">Description</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::textarea('description',null,array('class' => 'form-control span3','rows' => '4')); ?>
+
+
+                            </div>
+                        </div>  <!-- /controls -->
+                    </div>
+
+                    <p class="head-4 dashed bold">Production</p>
+
+                     <div class="control-group">
+                        <label class="control-label" for="">Unit type</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::select('units',
+                                        ['cups' => 'cups','sticks' => 'sticks','pc(s)'=>'pc',
+                                        'tsp' => 'tsp','tbsp' => 'tbsp','oz' => 'oz'],'',
+                                        ['id' => 'units','style' => 'width:270px;']); ?>
+
+
+                            </div>
+                        </div>  <!-- /controls -->
+                    </div>
+                   
+                    <div class="control-group">
+                        <label class="control-label" for="category name">Unit in grams </label>
+                        <div class="controls">
+                            <?php echo Form::text('unit_in_grams',null,array('autofocus'=> '','class' => 'form-control span3','id' => 'unit_in_grams')); ?>
+
+                            <!-- <span class="input-group-addon"> Conversion rate in grams  </span> -->
+                        </div> 
+                    </div>
+
+                     
+
+                    <p class="head-4 dashed bold">Vendor Information</p>
+                    <div class="control-group">
+                        <label class="control-label" for="">Vendor</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+                          
+                                <?php echo Form::select('supplier_id',['' => '',$suppliers],'',
+                                ['id' => 'supplier','style' => 'width:270px;','required' => 'required']); ?>
+
+
+                            </div>
+                        </div>  <!-- /controls -->
+                    </div>
+                    <div id="shipmentContainer">
+                        <p class="head-4 dashed bold">Receiving Information</p>
+                        <div class="control-group">
+                            <label class="control-label" for="">Units</label>
+
+                             <div class="controls">
+                                <?php echo Form::select('shipment_unit',
+                                                [
+                                                    'Please select',  
+                                                    'sacks' => 'Sacks',
+                                                    'packs'   => 'Packs',
+                                                    'dozen'  => 'Dozen'
+                                                ],'',['id' => 'ship_unit',
+                                                'style' => 'width:270px;']
+                                ); ?>
+
+                                <span class="input-group-addon"> This will be used when receiving a new shipment. </span>
+                            </div> <!--  /controls -->
+                         </div>
+                        <div class="control-group">
+                            <label class="control-label" for="category name">Amount </label>
+                            <div class="controls">
+                                <?php echo Form::text('base_kg',null,array('autofocus'=> '','class' => 'form-control span3','id' => 'base_kg')); ?>
+
+                                <span class="input-group-addon"> Specify its amount in kilograms. <i>
+                                e.g <strong> 1 sack = 25kg </strong></i> </span>
+                            </div> <!-- /controls-->
+                        </div>
+                        
+
+                    </div>
+
+                    <p class="head-4 dashed bold">Inventory</p>
+
+                     <div class="control-group">
+                        <label class="control-label" for="">Stock level alert</label>
+
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+
+                                <?php echo Form::number('alert_level'); ?>
+
+
+                                <span class="add-on" id="alert-unit"></span>
+                                <span class="input-group-addon"> The system will give an alert when this stock gets low </span>
+                              
+                            </div>
+
+                        </div>  <!-- /controls -->
+                    </div>
+                    
+                    <input type="hidden" name="base_g" value="">
+
+                 <p class="head-4 dashed bold">Pricing</p>
+                    <div class="control-group">
+                        <label class="control-label" for="category name"> Price</label>
+                        <div class="controls">
+                            <div class="input-prepend input-append">
+                                <span class="add-on">Php</span>
+                                <?php echo Form::number('price',null,array('class' => 'form-control span3','style' => 'width:225px;')); ?>
+
+
+                            </div>
+                        </div>  <!-- /controls -->
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><icon class="icon-save"></icon> Save</button>
+                        <a href="#" class="btn"><icon class="icon-arrow-left"></i> Back</a>
+                    </div>
+                    <?php echo Form::close(); ?>
+
+
+                </div>
+                    
+            </div>
+               
+         
+        </div><?php /* /end of widget-content */ ?>
+    </div><?php /* /end of widget-table*/ ?>
+
+    <br/><Br/>
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+    <script type="text/javascript">
+
+        //converstion rates in grams
+        var cup = 225;
+        var stick = 112;
+
+
+        $(document).ready(function(){
+
+            // $('input[name="unit_in_grams"]').attr('disabled','disabled');
+
+            $('input[id=base_kg]').keyup(function(){
+
+               //get the value and convert to g
+               var base_kg = $(this).val();
+               var g = base_kg * 1000;
+
+
+               //append to hidden input
+               $('input[name=base_g]').val(g);
+
+               // alert(base_kg);
+            });
+
+            
+
+            $('select[name="shipment_unit"]').change(function(){
+
+                // var unit = $(this).val();
+                var unit  = $("#ship_unit option:selected").text();
+
+               $('span#alert-unit').html(unit);
+               
+                // alert(unit);
+            });
+
+
+            function setValue(val){
+
+                $('input[name="unit_in_grams"]').val(val);
+                
+         }
+        });
+
+
+
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

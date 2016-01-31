@@ -1,0 +1,144 @@
+<?php $__env->startSection('content'); ?>
+	
+	<h2 class="head-1 ">Item Production - Recipes</h2><hr/>
+	<!-- <a id="addItem" class="btn btn-primary">Add Item</a><br/><br/> -->
+	
+	<div class="row">
+	 <?php echo Form::open(['route' => 'productions.cook','id' => 'formCook']); ?>
+
+	  <?php foreach($production_items as $item): ?>
+		<div  id="panel-content" class="span4">
+			 <div class="widget widget-table action-table">
+		        <div class="widget-header"> <i class="icon-plus"></i>
+		            <h3><?php echo Item::find($item->item_id)->name; ?></h3>
+		        </div>
+		        <div  class="widget-content" style="padding:10px;">
+		       
+		       
+		        	<!-- <?php echo $item->id; ?> -->
+		        	<p><strong>Servings to make <?php echo $item->qty; ?> pcs of <?php echo Item::find($item->item_id)->name; ?> </strong></p>
+
+		        	<p><strong>Recipe</strong></p><hr/>
+		        	<ul>
+		        		<?php 
+		        			$item = Item::find($item->item_id);
+		        			$item_id = $item->item_id;
+		        			$ingredients  = $item->ingredients;
+	
+		        		?>
+
+		        		<?php foreach($ingredients as $ingredient): ?>
+		        		
+		        			<li>
+		        				<?php echo $ingredient->name; ?> 
+		        				<?php echo Form::number('amount[]','',['placeholder' => 'Amount','class'=>'span1'
+
+		        				]); ?> 
+
+		        				<?php echo Form::select('ext[]',
+		        					[
+		        						'' 	  => '',
+		        						'1/8' => '1/8',
+		        						'1/4' => '1/4',
+		        						'1/3' => '1/3',
+		        						'1/2' => '1/2',
+		        						'2/3' => '2/3',
+		        						'3/4' => '3/4',
+		        						'7/8' => '7/8',
+		        						'3/8' => '3/8',
+		        						'5/8' => '5/8'
+		        					],'',['class'=>'span1']); ?>
+
+		        				<?php echo $ingredient->units; ?>
+
+
+		        				<?php echo Form::hidden('conv_rate[]',$ingredient->unit_in_grams); ?>
+
+		        				<?php echo Form::hidden('units[]',$ingredient->units); ?>
+
+		        				<?php echo Form::hidden('ing_ids[]',$ingredient->id); ?>
+
+		        				
+
+		        			</li>
+
+		        		<?php endforeach; ?>
+
+		        		
+		        	
+		        	</ul>
+
+
+		       
+		        
+
+		        	
+
+
+		        </div>
+
+     		</div>   <!-- /widget-table -->
+		</div><!-- /span4 -->
+	 <?php endforeach; ?>
+
+	 <div id="loader">
+	 	<!-- <img src="/img/baking.svg"> -->
+	 </div>
+	</div><!-- /row -->
+
+	<!-- <?php echo link_to_route('productions.produce','Add more items','',['class' => 'btn btn-default']); ?> -->
+	<?php echo Form::submit("Let's Cook", ['class' => 'btn btn-primary']); ?>
+
+	<?php echo Form::close(); ?>
+
+	
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('external-scripts'); ?>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			var loader = $('div#loader').hide();
+
+			$('form#formCook').submit(function(e){
+
+				e.preventDefault();
+				$('div.row').load('/partials/production.html');
+				// loader.show();
+				var postData = $(this).serialize();
+				var reqUrl = $(this).attr('action');
+				console.log(reqUrl);
+
+				$.ajax({
+
+			 		url : reqUrl,
+			 		type: 'GET',
+			 		data : postData,
+
+			 		success : function(data){
+
+			 			console.log(data);
+			 			// setTimeout("window.location.href='/items/productions/', function(){ $('#loader').hide(); };",1000);
+			 			
+					},
+					error : function(e){
+
+						console.log('Error' + e.status +': ' + e.statusText);
+					}
+
+	 	
+
+	 		}); /* end ajax request */
+
+			});
+		});
+	</script>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

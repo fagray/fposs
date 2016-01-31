@@ -1,0 +1,78 @@
+<?php $__env->startSection('content'); ?>
+   <!--  <span class="pull-right">
+         <div class="btn-group">
+             <a href="#modal-newIcing" data-toggle="modal"  class="btn btn-success"><i class="icon-plus"> New</i></a>
+             <button type="button" class="btn btn-default"><i class="icon-refresh"></i> Refresh</button>
+             <button type="button" class="btn btn-default"><i class="icon-trash"></i> Delete</button>
+         </div>
+    </span><br/> -->
+    <br/>
+
+    <div class="widget widget-table action-table">
+        <div class="widget-header"> <i class="icon-th-list"></i>
+
+            <h3><?php echo $title; ?></h3>
+
+        </div>
+        <!-- /widget-header -->
+        <div class="widget-content">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Item Code </th>
+                   
+                  
+                    <th> Price </th>
+                    <th> Qty </th>
+
+                  
+                    <!-- <th class="td-actions">Actions </th> -->
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($sales as $sale): ?>
+                    <tr>
+                        <td> <?php echo Item::find($sale->item_id)->barcode; ?> </td>
+                        <td> Php <?php echo number_format(Item::find($sale->item_id)->price,2); ?> </td>
+                        <td> <?php echo $sale->qty; ?> </td>
+
+                       
+                     
+                       <!--  <td class="td-actions">
+                            <a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-pencil"> </i></a>
+                            <a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td> -->
+                    </tr>
+                <?php endforeach; ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td> <strong>Total : <?php echo $sale->amount; ?> </strong></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>  <strong>Cash Received : <?php echo $sale->cash; ?> </strong></td>
+                        </tr>
+                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td>  <strong>Change : <?php echo $sale->change; ?>
+
+                                 | Cashier : <?php echo $sale->cashier; ?></strong>  </td>
+                            
+                        </tr>
+                        
+                        
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /widget-content -->
+    </div>
+
+   
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
